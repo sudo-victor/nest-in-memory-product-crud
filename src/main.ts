@@ -1,11 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { EnsureAuthenticateMiddleware } from './auth/middlewares/ensureAuthenticate.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Criar um documento OpenApi
+  app.use(EnsureAuthenticateMiddleware);
+
   const configSwagger = new DocumentBuilder()
     .setTitle('Api de Produtos')
     .setDescription('blablabla')
@@ -13,14 +15,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, configSwagger);
   SwaggerModule.setup('my-api', app, document);
-
-  const configSwagger2 = new DocumentBuilder()
-    .setTitle('Api pra galera')
-    .setDescription('blablabla')
-    .setVersion('1.0')
-    .build();
-  const document2 = SwaggerModule.createDocument(app, configSwagger2);
-  SwaggerModule.setup('api-da-galera', app, document2);
 
   await app.listen(3000);
 }
