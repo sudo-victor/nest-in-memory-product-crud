@@ -8,6 +8,8 @@ import {
   Query,
   Req,
   Res,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ApiTags, ApiResponseOptions } from '@nestjs/swagger';
 import { Request, Response } from 'express';

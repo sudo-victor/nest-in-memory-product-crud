@@ -1,12 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { EnsureAuthenticateMiddleware } from './auth/middlewares/ensureAuthenticate.middleware';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  app.use(EnsureAuthenticateMiddleware);
 
   const configSwagger = new DocumentBuilder()
     .setTitle('Api de Produtos')
