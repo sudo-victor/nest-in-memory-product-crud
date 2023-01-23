@@ -22,7 +22,6 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    throw new UserNotFoundError();
     return this.usersService.create(createUserDto);
   }
 

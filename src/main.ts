@@ -6,7 +6,7 @@ import { LoggingInterceptor } from './interceptors/logger.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new LoggingInterceptor());
 
   const configSwagger = new DocumentBuilder()
