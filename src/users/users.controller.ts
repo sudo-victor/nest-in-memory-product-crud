@@ -6,10 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { LoggingInterceptor } from 'src/interceptors/logger.interceptor';
+import { UserNotFoundError } from 'src/exceptions/user-not-found.exception';
 
 @Controller('users')
 export class UsersController {
@@ -17,6 +22,7 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
+    throw new UserNotFoundError();
     return this.usersService.create(createUserDto);
   }
 

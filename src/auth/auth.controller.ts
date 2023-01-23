@@ -8,6 +8,7 @@ export class AuthController {
 
   @Post('login')
   login(@Body() authData: LoginDto) {
+    console.log('controller');
     return {
       accessToken: this.authService.login(authData),
     };
